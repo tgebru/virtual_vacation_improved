@@ -36,7 +36,9 @@
 
 - (void) viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];  
+    self.navigationController.toolbarHidden=NO;
+
     self.flickrPhotoCache = [[Cache alloc]init];
     [self.flickrPhotoCache getCache];
     NSArray *photos = [[NSUserDefaults standardUserDefaults] objectForKey:RECENTS_KEY];
@@ -46,6 +48,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    self.navigationController.toolbarHidden=NO;
+
     //Refresh the photos list
     //self.photos = [[NSUserDefaults standardUserDefaults] objectForKey:RECENTS_KEY];
    

@@ -8,12 +8,16 @@
 
 #import "MapViewController.h"
 #import "FlickerRecentPhotosFromPlaceViewController.h"
-
+#import "Cache.h"
 
 @interface MapViewController() <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSDictionary *place;
+@property (strong, nonatomic) NSDictionary *photo;
 @property (strong, nonatomic) NSDictionary *findIndexInAnnotationsForPhotoTitle;
+@property (nonatomic, strong) Cache *flickrPhotoCache;
+@property (nonatomic, strong) id<MKAnnotation> currentAnnotation;
+
 @end
 
 @implementation  MapViewController
@@ -23,10 +27,21 @@
 @synthesize annotations = _annotations;
 @synthesize delegate    = _delegate;
 @synthesize place       = _place;
+@synthesize photo       = _photo;
 @synthesize findIndexInAnnotationsForPhotoTitle = _findIndexInAnnotationsForPhotoTitle;
+@synthesize flickrPhotoCache = _flickrPhotoCache;
+@synthesize currentAnnotation= _currentAnnotation;
+
 
 #pragma mark - Synchronize Model and View
 
+- (void) showSpinner
+{
+    //Show a spinner to indicate that photos are getting downloaded
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+}
 
 - (void) updateMapView
 {
@@ -73,15 +88,26 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    self.currentAnnotation = view.annotation;
     NSLog (@"callout accessory tapped for annoation %@", [view.annotation title]);
-    self.place=[self.delegate mapViewcontroller:self getDataForAnnotation:view.annotation];
-    [self performSegueWithIdentifier:@"toListOfPhotosFromMap" sender:self.delegate];     
+    if ([self.delegate isKindOfClass:[FlickerPhotosViewController class]]){
+        self.place=[self.delegate mapViewcontroller:self getDataForAnnotation:view.annotation];
+        [self performSegueWithIdentifier:@"toListOfPhotosFromMap" sender:self.delegate];  
+    }else{
+        //self.photo=[self.delegate mapViewcontroller:self getDataForAnnotation:view.annotation];
+        [self performSegueWithIdentifier:@"toPhotoFromMap" sender:self.delegate];  
+    }
 }
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [segue.destinationViewController setPlaceForPhotos: self.place];
+    if ([segue.destinationViewController isKindOfClass:[FlickerRecentPhotosFromPlaceViewController class]]){
+        [segue.destinationViewController setPlaceForPhotos: self.place];    
+    }else{
+        UIImage *photoImage = [self.delegate mapViewController:self bigPhotoForAnnotation:self.currentAnnotation];
+        [segue.destinationViewController setImage:photoImage];
+    }
 }
 
 

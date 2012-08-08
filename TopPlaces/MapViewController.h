@@ -19,6 +19,12 @@
 
 - (NSDictionary *)mapViewcontroller: (MapViewController *)sender
             getDataForAnnotation: (id <MKAnnotation>)annotation;
+
+@optional
+
+- (UIImage *)mapViewController: (MapViewController *)sender
+         bigPhotoForAnnotation:(id <MKAnnotation>)annotation;
+
 @end
 
 @interface MapViewController : UIViewController

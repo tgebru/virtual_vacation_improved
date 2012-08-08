@@ -64,7 +64,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self showSpinner];    
+    self.navigationController.toolbarHidden=NO;
+
+    [self showSpinner];   
     
     //Fork a thread to download photos
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);

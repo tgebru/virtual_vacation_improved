@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
+         startingLineNumber = "121"
+         endingLineNumber = "121"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366213932.02985"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
          landmarkName = "-setPlaceForPhotos:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "140"
-         endingLineNumber = "140"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
          landmarkName = "@implementation FlickerPhotosViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "143"
-         endingLineNumber = "143">
+         startingLineNumber = "146"
+         endingLineNumber = "146">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -91,11 +91,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366215481.535245"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "245"
-         endingLineNumber = "245">
+         startingLineNumber = "253"
+         endingLineNumber = "253">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -159,11 +159,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366213932.02985"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -187,11 +187,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "80"
-         endingLineNumber = "80"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -201,11 +201,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
          <Locations>
@@ -241,11 +241,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366213932.02985"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366215481.535245"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "207"
-         endingLineNumber = "207"
+         startingLineNumber = "215"
+         endingLineNumber = "215"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -311,11 +311,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366215481.535245"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "202"
-         endingLineNumber = "202"
+         startingLineNumber = "210"
+         endingLineNumber = "210"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -465,7 +465,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366069189.797195"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "51"
@@ -493,11 +493,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366139102.332404"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -507,11 +507,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366069189.797195"
+         timestampString = "366218237.729701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
          landmarkName = "-mapViewController:imageForAnnotation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -535,7 +535,21 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366213932.02985"
+         timestampString = "366218137.583216"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
+         landmarkName = "-mapAnnotations"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "118"
@@ -549,11 +563,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366213932.02985"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-mapAnnotations"
          landmarkType = "5">
       </FileBreakpoint>
@@ -563,25 +577,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366213932.02985"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "-mapAnnotations"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366215481.535245"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "186"
+         endingLineNumber = "186"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -591,11 +591,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerRecentPhotosFromPlaceViewController.m"
-         timestampString = "366215481.535245"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -605,11 +605,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/MapViewController.m"
-         timestampString = "366151822.188389"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
          landmarkName = "-updateMapView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -619,11 +619,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/MapViewController.m"
-         timestampString = "366152363.095676"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "-mapView:viewForAnnotation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -633,11 +633,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/MapViewController.m"
-         timestampString = "366214250.575922"
+         timestampString = "366218137.583216"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "141"
-         endingLineNumber = "141"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
          landmarkName = "-mapView:annotationView:calloutAccessoryControlTapped:"
          landmarkType = "5">
       </FileBreakpoint>

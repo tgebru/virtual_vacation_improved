@@ -49,10 +49,13 @@
 
 - (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
 {
+    /*
     FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
     NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
     NSData *data = [NSData dataWithContentsOfURL:url];
     return data ? [UIImage imageWithData:data] : nil;
+     */
+    return nil;
 }
 
 - (NSDictionary *)mapViewcontroller:(MapViewController *)sender getDataForAnnotation: (id <MKAnnotation>)annotation

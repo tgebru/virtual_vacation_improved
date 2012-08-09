@@ -22,8 +22,6 @@
 
 @implementation  MapViewController
 @synthesize mapView = _mapView;
-
-//@synthesize mapView = _mapView;
 @synthesize annotations = _annotations;
 @synthesize delegate    = _delegate;
 @synthesize place       = _place;
@@ -169,7 +167,6 @@
     [self setMapView:nil];
     [super viewDidUnload];
 }
-
 
 #pragma mark - Autorotation 
 

@@ -40,6 +40,7 @@
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 }
+
 - (IBAction)goToMap:(id)sender {
     [self performSegueWithIdentifier:@"toMapFromListOfPhotos" sender:sender];
 }
@@ -152,9 +153,16 @@
 
 - (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
 {
-    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
-    NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    __block NSData *data;
+    //Download the flickr image in another thread
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr thumbnail downloader", NULL);
+    [self showSpinner];  
+    dispatch_async(downloadQueue, ^{
+        FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+        NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
+        data = [NSData dataWithContentsOfURL:url];
+        NSLog (@"got Thumbnail");
+    });
     return data ? [UIImage imageWithData:data] : nil;
 }
 

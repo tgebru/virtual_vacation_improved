@@ -33,6 +33,11 @@
 @synthesize currentAnnotation= _currentAnnotation;
 
 
+#define MINIMUM_ZOOM_ARC 0.014 //approximately 1 miles (1 degree of arc ~= 69 miles)
+#define ANNOTATION_REGION_PAD_FACTOR 1.15
+#define MAX_DEGREES_ARC 360
+
+
 #pragma mark - Synchronize Model and View
 
 - (void) showSpinner
@@ -48,6 +53,43 @@
     if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
     if (self.annotations)[self.mapView addAnnotations:self.annotations];
     self.navigationController.toolbarHidden=YES; 
+    
+    //Adjust map view bounds to show all annotations
+    int count = [self.mapView.annotations count];
+    MKMapPoint points[count]; //C array of MKMapPoint struct
+    for( int i=0; i<count; i++ ) //load points C array by converting coordinates to points
+    {
+        CLLocationCoordinate2D coordinate = [(id <MKAnnotation>)[self.annotations objectAtIndex:i] coordinate];
+        points[i] = MKMapPointForCoordinate(coordinate);
+    }
+    //create MKMapRect from array of MKMapPoint
+    MKMapRect mapRect = [[MKPolygon polygonWithPoints:points count:count] boundingMapRect];
+
+    //convert MKCoordinateRegion from MKMapRect
+    MKCoordinateRegion region = MKCoordinateRegionForMapRect(mapRect);
+ 
+    //add padding so pins aren't scrunched on the edges
+    region.span.latitudeDelta  *= ANNOTATION_REGION_PAD_FACTOR;
+    region.span.longitudeDelta *= ANNOTATION_REGION_PAD_FACTOR;
+    
+    //but padding can't be bigger than the world
+    if( region.span.latitudeDelta > MAX_DEGREES_ARC ) { region.span.latitudeDelta  = MAX_DEGREES_ARC; }
+    if( region.span.longitudeDelta > MAX_DEGREES_ARC ){ region.span.longitudeDelta = MAX_DEGREES_ARC; }
+
+
+    //and don't zoom in stupid-close on small samples
+    if( region.span.latitudeDelta  < MINIMUM_ZOOM_ARC ) { region.span.latitudeDelta  = MINIMUM_ZOOM_ARC; }
+    if( region.span.longitudeDelta < MINIMUM_ZOOM_ARC ) { region.span.longitudeDelta = MINIMUM_ZOOM_ARC; }
+ 
+    //and if there is a sample of 1 we want the max zoom-in instead of max zoom-out
+   
+    if( count == 1 )
+    { 
+        region.span.latitudeDelta = MINIMUM_ZOOM_ARC;
+        region.span.longitudeDelta = MINIMUM_ZOOM_ARC;
+    }
+    [self.mapView setRegion:region animated:YES];
+
 }
 
 - (void)setMapView: (MKMapView *)mapView
@@ -73,6 +115,8 @@
         aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }    
     aView.annotation = annotation;
+    NSLog (@"Title, %@", aView.annotation.title);
+     NSLog (@"Subtitile, %@", aView.annotation.subtitle);
     [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
     aView.canShowCallout = YES;
     return aView;
@@ -94,22 +138,17 @@
         self.place=[self.delegate mapViewcontroller:self getDataForAnnotation:view.annotation];
         [self performSegueWithIdentifier:@"toListOfPhotosFromMap" sender:self.delegate];  
     }else{
-        //self.photo=[self.delegate mapViewcontroller:self getDataForAnnotation:view.annotation];
-        [self performSegueWithIdentifier:@"toPhotoFromMap" sender:self.delegate];  
+        [self.delegate mapViewController:self bigPhotoForAnnotation:self.currentAnnotation];
+        NSLog(@"returned from fetching image");
     }
 }
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController isKindOfClass:[FlickerRecentPhotosFromPlaceViewController class]]){
         [segue.destinationViewController setPlaceForPhotos: self.place];    
-    }else{
-        UIImage *photoImage = [self.delegate mapViewController:self bigPhotoForAnnotation:self.currentAnnotation];
-        [segue.destinationViewController setImage:photoImage];
     }
 }
-
 
 #pragma mark - View lifecycle
 

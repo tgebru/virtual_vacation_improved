@@ -18,17 +18,18 @@
 @interface FlickerRecentPhotosFromPlaceViewController()
 @property (nonatomic, strong) UIImage *photoImage;
 @property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
+@property (nonatomic, strong) NSDictionary *photoForAnnotation;
 @property (nonatomic, strong) NSDictionary *place;
 @property (nonatomic, strong) Cache *flickrPhotoCache;
 
 @end
 
-
 @implementation FlickerRecentPhotosFromPlaceViewController
 @synthesize photoImage = _photoImage;
 @synthesize place = _place;
 @synthesize photos = _photos;
-@synthesize flickrPhotoCache;
+@synthesize flickrPhotoCache = _flickrPhotoCache;
+@synthesize photoForAnnotation = _photoForAnnotation;
 
 #pragma mark - View lifecycle
 
@@ -47,7 +48,6 @@
 {
     [super viewDidLoad];
      self.navigationController.toolbarHidden=NO;
-    [self showSpinner];
    
     self.flickrPhotoCache = [[Cache alloc]init];
     [self.flickrPhotoCache getCache];
@@ -148,43 +148,6 @@
     NSLog (@"done saving to defaults");
 }
 
-- (UIImage *) getImageForPhoto:(NSDictionary *)photo
-{
-    //Fork a thread to download photos
-    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
-    [self showSpinner];  
-    dispatch_async(downloadQueue, ^{
-        NSURL    *photoUrl;
-        NSData   *imageData;
-        NSString *urlString;
-        
-        [self showSpinner];
-        //NSLog(@"Just started thread");
-        if ([flickrPhotoCache isInCache:photo]){
-            urlString= [flickrPhotoCache readImageFromCache:photo];
-            imageData = [NSData dataWithContentsOfFile:urlString];
-        }else {
-            photoUrl = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
-            imageData = [NSData dataWithContentsOfURL:photoUrl];   
-        }
-        //NSLog(@"Downloaded Image: %d", [imageData length]);
-        dispatch_async(dispatch_get_main_queue(),^{            
-            self.photoImage= [UIImage imageWithData:imageData];
-            //NSLog(@"Downloaded Image height: %f", [self.photoImage size].height);
-            
-            //Save photo to cache
-            [flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
-            NSLog(@"done caching");
-            
-            [self saveToNSDefaults:photo];
-            self.navigationItem.rightBarButtonItem = nil;
-        });
-    });
-    
-    dispatch_release(downloadQueue);   
-    return self.photoImage;
-}
-
 #pragma mark - MapViewControllerDelegate
 
 - (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
@@ -200,25 +163,29 @@
     FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
     return fpa.photo;
 }
-- (UIImage *)mapViewController: (MapViewController *)sender bigPhotoForAnnotation:(id <MKAnnotation>)annotation
 
+-(void)mapViewController: (MapViewController *)sender bigPhotoForAnnotation:(id <MKAnnotation>)annotation
 {
     FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
-    return [self getImageForPhoto:fpa.photo];
+    self.photoForAnnotation = fpa.photo;
+    [self performSegueWithIdentifier:@"Show Single Photo" sender:sender];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    NSDictionary *photo;
     //NSLog(@"prepare for segue %@", [sender stringValue]);
     if ([sender isKindOfClass:[UIBarButtonItem class]]){      
         [segue.destinationViewController setDelegate:self];
         [segue.destinationViewController setAnnotations:[self mapAnnotations]];
         
     }else{
-    
-        NSDictionary *photo = [self.photos objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
-        //NSLog(@"inside prepareForSegue");
+        if ([sender isKindOfClass:[MapViewController class]]){
+            photo = self.photoForAnnotation;
+        }else{
+            photo = [self.photos objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        }
+        NSLog(@"inside prepareForSegue");
     
         //Fork a thread to download photos
         dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
@@ -227,11 +194,10 @@
             NSURL    *photoUrl;
             NSData   *imageData;
             NSString *urlString;
-        
-            [self showSpinner];
+                    
             //NSLog(@"Just started thread");
-            if ([flickrPhotoCache isInCache:photo]){
-                urlString= [flickrPhotoCache readImageFromCache:photo];
+            if ([self.flickrPhotoCache isInCache:photo]){
+                urlString= [self.flickrPhotoCache readImageFromCache:photo];
                 imageData = [NSData dataWithContentsOfFile:urlString];
             }else {
                 photoUrl = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
@@ -243,38 +209,15 @@
                 //NSLog(@"Downloaded Image height: %f", [self.photoImage size].height);
             
                 //Save photo to cache
-                [flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
+                [self.flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
                 NSLog(@"done caching");
             
                 //save to NSUserDefaults  
                 [self saveToNSDefaults:photo];
                 
-              /*  
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                NSMutableArray *recents = [[defaults objectForKey:RECENTS_KEY] mutableCopy];
-                if (!recents) recents = [NSMutableArray array];
-            
-                //If the photo is stored already remove it
-                NSString *photoID = [photo objectForKey: @"id"];
-                for (int i=0; i<[recents count] ; i++){
-                    NSDictionary *photo = [self.photos objectAtIndex:i];
-                    if ([[photo objectForKey:@"id"] isEqualToString:photoID]){
-                        [recents removeObject:photo];
-                    }
-                }
-            
-                if ([recents count] == MAX_RESULTS){
-                    [recents removeObjectAtIndex:MAX_RESULTS-1];
-                }
-            
-                [recents addObject:photo];
-                [defaults setObject:recents forKey:RECENTS_KEY];
-                [defaults synchronize];
-            
-                NSLog (@"done saving to defaults");
                 self.navigationItem.rightBarButtonItem = nil;
                 [segue.destinationViewController setImage:self.photoImage];
-               */
+               
             });
         });
     

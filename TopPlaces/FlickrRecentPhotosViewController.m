@@ -10,6 +10,8 @@
 //#import "FlickerRecentPhotosFromPlaceViewController.h"
 #import "FlickrFetcher.h"
 #import "Cache.h"
+#import "FlickrPhotoAnnotation.h"
+#import "MapViewController.h"
 
 
 #define MAX_RESULTS 50
@@ -18,13 +20,14 @@
 @property (nonatomic, strong) UIImage *photoImage;
 @property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
 @property (nonatomic, strong) Cache *flickrPhotoCache;
-
+@property (nonatomic, strong) NSDictionary *photoForAnnotation;
 @end
 
 @implementation FlickrRecentPhotosViewController
 @synthesize photoImage = _photoImage;
 @synthesize photos = _photos;
 @synthesize flickrPhotoCache = _flickrPhotoCache;
+@synthesize photoForAnnotation = _photoForAnnotation;
 
 - (void) showSpinner
 {
@@ -34,6 +37,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 }
 
+- (IBAction)goToMap:(id)sender {
+    [self performSegueWithIdentifier:@"toMapFromListOfPhotos" sender:sender];
+
+}
 - (void) viewDidLoad
 {
     [super viewDidLoad];  
@@ -54,6 +61,8 @@
     //self.photos = [[NSUserDefaults standardUserDefaults] objectForKey:RECENTS_KEY];
    
 }
+
+#pragma mark - Table view delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -86,47 +95,81 @@
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - MapViewControllerDelegate
+
+- (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
+{
+    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+    NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
+- (NSDictionary *)mapViewcontroller:(MapViewController *)sender getDataForAnnotation: (id <MKAnnotation>)annotation
+{
+    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+    return fpa.photo;
+}
+
+-(void)mapViewController: (MapViewController *)sender bigPhotoForAnnotation:(id <MKAnnotation>)annotation
+{
+    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+    self.photoForAnnotation = fpa.photo;
+    [self performSegueWithIdentifier:@"Show Single Photo" sender:sender];
+}
+
+//Get Annotations for mapView
+- (NSArray *)mapAnnotations
+{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.photos count]];
+    for (NSDictionary *photo in self.photos) {
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
+    }
+    return annotations;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
- /*  
-    NSDictionary *photo = [self.photos objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
-    NSURL *photoUrl = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
-    NSData* imageData = [NSData dataWithContentsOfURL:photoUrl];
-    self.photoImage= [UIImage imageWithData:imageData];
-  */  
-    
-    [self showSpinner]; 
-    
-    //Fork a thread to download photos
-    dispatch_queue_t downloadQueue = dispatch_queue_create("recent photo downloader/cacher", NULL);
-    dispatch_async(downloadQueue, ^{
-        NSURL    *photoUrl;
-        NSData   *imageData;
-        NSString *urlString;
-                
-        NSDictionary *photo = [self.photos objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
-        Cache *flickrPhotoCache = [[Cache alloc]init];
-        [flickrPhotoCache getCache];
-        if ([flickrPhotoCache isInCache:photo]){
-            urlString= [flickrPhotoCache readImageFromCache:photo];
-            imageData = [NSData dataWithContentsOfFile:urlString];
-        }else {
-            photoUrl =[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
-            NSLog(@"About to do dataWithContentsOfURL");
-            imageData = [NSData dataWithContentsOfURL:photoUrl];
-            NSLog(@"after dataWithContentsOfURL");
-            [flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
+    NSDictionary *photo;
+    if ([sender isKindOfClass:[UIBarButtonItem class]]){      
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setAnnotations:[self mapAnnotations]];
+        
+    } else {
+        if ([sender isKindOfClass:[MapViewController class]]){
+            photo = self.photoForAnnotation;
+        } else {
+            photo = [self.photos objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Do we seg fault here?");
-            self.photoImage= [UIImage imageWithData:imageData];
-            self.navigationItem.rightBarButtonItem = nil;
-            [segue.destinationViewController setImage:self.photoImage];
-        });
-    });
+        [self.flickrPhotoCache getCache];
     
-    dispatch_release(downloadQueue);
+        //Fork a thread to download photos
+        dispatch_queue_t downloadQueue = dispatch_queue_create("recent photo downloader/cacher", NULL);
+        [self showSpinner];
+        dispatch_async(downloadQueue, ^{
+            NSURL    *photoUrl;
+            NSData   *imageData;
+            NSString *urlString;
+            if ([self.flickrPhotoCache isInCache:photo]){
+                urlString= [self.flickrPhotoCache readImageFromCache:photo];
+                imageData = [NSData dataWithContentsOfFile:urlString];
+            }else {
+                photoUrl =[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
+                NSLog(@"About to do dataWithContentsOfURL");
+                imageData = [NSData dataWithContentsOfURL:photoUrl];
+                NSLog(@"after dataWithContentsOfURL");
+                [self.flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"Do we seg fault here?");
+                self.photoImage= [UIImage imageWithData:imageData];
+                self.navigationItem.rightBarButtonItem = nil;
+                [segue.destinationViewController setImage:self.photoImage];
+            });
+        });
+    
+        dispatch_release(downloadQueue);
+    }
 }
 
 @end

@@ -22,7 +22,10 @@
 
 @optional
 
-- (UIImage *)mapViewController: (MapViewController *)sender
+//- (UIImage *)mapViewController: (MapViewController *)sender
+//         bigPhotoForAnnotation:(id <MKAnnotation>)annotation;
+
+- (void)mapViewController: (MapViewController *)sender
          bigPhotoForAnnotation:(id <MKAnnotation>)annotation;
 
 @end

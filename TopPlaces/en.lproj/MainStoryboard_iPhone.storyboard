@@ -66,11 +66,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zv0-LA-WTA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="NUa-8W-8Wu" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VNw-LK-9XW">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="uJr-6G-BKN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
@@ -79,11 +79,10 @@
                     <navigationItem key="navigationItem" id="DTw-V6-kid"/>
                     <connections>
                         <outlet property="mapView" destination="uJr-6G-BKN" id="laA-r8-cZE"/>
-                        <segue destination="XPq-lk-8Mn" kind="push" identifier="toPhotoFromRecentMap" id="bAX-TA-7Yf"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1570" y="564"/>
+            <point key="canvasLocation" x="1114" y="590"/>
         </scene>
         <scene sceneID="4Z2-nf-95d">
             <objects>
@@ -214,7 +213,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RI1-2d-Ggy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Xlm-Y9-8Wz" customClass="FlickrRecentPhotosViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gkT-ou-SXG">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -243,7 +242,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="XPq-lk-8Mn" kind="push" id="5qg-Ve-zVw"/>
+                                    <segue destination="XPq-lk-8Mn" kind="push" identifier="Show Single Photo" id="5qg-Ve-zVw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -252,7 +251,16 @@
                             <outlet property="delegate" destination="Xlm-Y9-8Wz" id="1Kn-Kd-mPL"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Show in Map" id="wI3-Vl-m1K">
+                            <connections>
+                                <action selector="goToMap:" destination="Xlm-Y9-8Wz" id="Yy8-73-xyF"/>
+                                <segue destination="NUa-8W-8Wu" kind="push" identifier="toMapFromListOfPhotos" id="vJU-4i-tm6"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Recent Photos" id="T7k-Sp-5a2"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="289" y="558"/>
@@ -292,7 +300,6 @@
                     <navigationItem key="navigationItem" id="A4U-8B-3qs"/>
                     <connections>
                         <outlet property="mapView" destination="9GI-4A-EON" id="jMA-bR-X78"/>
-                        <segue destination="XPq-lk-8Mn" kind="push" identifier="toPhotoFromMap" id="Mkz-TN-Saq"/>
                     </connections>
                 </viewController>
             </objects>
@@ -354,6 +361,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="WLn-9X-P8t"/>
-        <segue reference="ZCo-OM-rjQ"/>
+        <segue reference="5qg-Ve-zVw"/>
     </inferredMetricsTieBreakers>
 </document>

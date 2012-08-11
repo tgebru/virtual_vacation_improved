@@ -70,7 +70,7 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "36"
          endingLineNumber = "36"
-         landmarkName = "+topPlaces"
+         landmarkName = "+stanfordPhotos"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -639,6 +639,118 @@
          startingLineNumber = "139"
          endingLineNumber = "139"
          landmarkName = "-mapView:annotationView:calloutAccessoryControlTapped:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
+         landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
+         landmarkName = "-readVirtualVacations"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
+         landmarkName = "@implementation VirtualVacationController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
+         landmarkName = "-createNewVacation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VirtualVacationController.m"
+         timestampString = "366400524.310065"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
+         landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

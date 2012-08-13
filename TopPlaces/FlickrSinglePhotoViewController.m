@@ -15,6 +15,7 @@
 @end
 
 @implementation FlickrSinglePhotoViewController
+//@synthesize visitButton;
 @synthesize imageView ;
 @synthesize scrollView;
 //@synthesize image =_image;
@@ -25,6 +26,22 @@
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+}
+
+- (IBAction)toggleVisit:(id)sender {
+    //Toggle title of button
+    if ([sender isKindOfClass:[UIButton class]]){
+        NSLog (@"it is a UIButton");
+        UIButton *visitButton = (UIButton *)sender;
+        if ([visitButton.titleLabel.text compare:@"Visit"] == NSOrderedSame){
+            [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
+        }else {
+            [visitButton setTitle:@"Visit" forState:UIControlStateNormal];
+        }
+    }
+
+    //save to my vacation database
+    
 }
 
 - (void)setImage:(UIImage *)image
@@ -103,6 +120,7 @@
     [self setScrollView:nil];
     [self setScrollView:nil];
     [self setImageView:nil];
+    //[self setVisitButton:nil];
     [super viewDidUnload];
 }
 

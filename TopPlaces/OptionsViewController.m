@@ -7,6 +7,8 @@
 //
 
 #import "OptionsViewController.h"
+#import "PlacesViewController.h"
+#import "TagsViewController.h"
 
 @interface OptionsViewController()
 @property (nonatomic, strong) NSString *vacationDatabaseName;
@@ -19,6 +21,7 @@
 -(void) updateVacationDatabaseName: (NSString *) vacationDatabaseName
 {
     self.vacationDatabaseName = vacationDatabaseName;
+    NSLog(@"%s: vacation db name: %@", __FUNCTION__, vacationDatabaseName);
 }
 
 #pragma mark - View lifecycle
@@ -37,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    [self setTitle:self.vacationDatabaseName];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -66,6 +69,14 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.destinationViewController respondsToSelector:@selector(setVacationName:)] ){
+      //  NSLog(@"responds to selector"); 
+        [segue.destinationViewController performSelector:@selector(setVacationName:) withObject:self.vacationDatabaseName];
+        }    
 }
 
 @end

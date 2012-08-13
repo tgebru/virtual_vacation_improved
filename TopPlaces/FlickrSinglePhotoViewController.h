@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface FlickrSinglePhotoViewController : UIViewController
+//@property (weak, nonatomic) IBOutlet UIButton *visitButton;
 //@property (nonatomic, strong) UIImage *image;
 - (void)setImage:(UIImage *)image;
+- (IBAction)toggleVisit:(id)sender;
+
 @end

@@ -157,6 +157,21 @@
                                         <rect key="frame" x="-5" y="20" width="360" height="466"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yc3-HV-49i">
+                                        <rect key="frame" x="29" y="26" width="72" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Visit">
+                                            <color key="titleColor" red="0.19607843458652496" green="0.30980393290519714" blue="0.5215686559677124" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleVisit:" destination="XPq-lk-8Mn" eventType="touchUpInside" id="kKz-3d-AFD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -336,7 +351,7 @@
         <scene sceneID="cr8-TH-eG4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hg2-tE-otB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="aet-oo-HCT" sceneMemberID="viewController">
+                <tableViewController id="aet-oo-HCT" customClass="PlacesViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="N5B-oL-RBM">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -523,7 +538,7 @@
         <scene sceneID="aeL-xr-bEd">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdL-nu-0dD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="fBO-Sa-oiV" sceneMemberID="viewController">
+                <tableViewController id="fBO-Sa-oiV" customClass="TagsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="T4L-PY-Pzy">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -586,6 +601,9 @@
         </scene>
     </scenes>
     <classes>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
         <class className="FlickerPhotosViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickerPhotosViewController.h"/>
         </class>
@@ -611,6 +629,12 @@
         <class className="OptionsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsViewController.h"/>
         </class>
+        <class className="PlacesViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesViewController.h"/>
+        </class>
+        <class className="TagsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TagsViewController.h"/>
+        </class>
         <class className="VirtualVacationController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VirtualVacationController.h"/>
             <relationships>
@@ -624,9 +648,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="vJU-4i-tm6"/>
-        <segue reference="5qg-Ve-zVw"/>
-        <segue reference="rYM-kx-yDh"/>
         <segue reference="WLn-9X-P8t"/>
+        <segue reference="4PM-qn-qU0"/>
+        <segue reference="5qg-Ve-zVw"/>
+        <segue reference="vJU-4i-tm6"/>
     </inferredMetricsTieBreakers>
 </document>

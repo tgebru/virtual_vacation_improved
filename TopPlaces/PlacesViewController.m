@@ -9,6 +9,7 @@
 #import "PlacesViewController.h"
 #import "FlickrFetcher.h"
 #import "VacationHelper.h"
+#import "Place.h"
 //#import "Photographer.h"
 //#import "Photo+Flickr.h"
 
@@ -26,35 +27,12 @@
 @synthesize vacationName;
 @synthesize photoDatabase=_photoDatabase;
 
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,11 +43,16 @@
                       usingBlock:^ (UIManagedDocument *doc){
                           [self documentIsReady:doc];
                       }];
-}   
+}  
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+}
 
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Place"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Place"];
     request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     // no predicate because we want ALL the Photographers
     
@@ -78,12 +61,11 @@
      
 -(void) documentIsReady:(UIManagedDocument *)doc {
     
-   
-    [self setupFetchedResultsController];
     self.photoDatabase = doc;
+    [self setupFetchedResultsController];
+    
    //[self fetchFlickrDataIntoDocument:self.photoDatabase];
     
-
 }
 
 
@@ -149,10 +131,10 @@
         self.photoDatabase = [[UIManagedDocument alloc] initWithFileURL:url]; // setter will create this for us on disk
     }
 }
-
+*/
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Photographer Cell";
+    static NSString *CellIdentifier = @"Places Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -160,21 +142,21 @@
     }
     
     // ask NSFetchedResultsController for the NSMO at the row in question
-    Photographer *photographer = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Place *place = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // Then configure the cell using it ...
-    cell.textLabel.text = photographer.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", [photographer.photos count]];
-    
+    cell.textLabel.text = place.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", [place.photos count]];
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+/*
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    Photographer *photographer = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Photo *photographer = [self.fetchedResultsController objectAtIndexPath:indexPath];
     if ([segue.destinationViewController respondsToSelector:@selector(setPhotographer:)]) {
-        [segue.destinationViewController performSelector:@selector(setPhotographer:) withObject:photographer];
+        [segue.destinationViewController performSelector:@selector(setPhoto:) withObject:photographer];
     }
-}*/
-
+}
+*/
 @end

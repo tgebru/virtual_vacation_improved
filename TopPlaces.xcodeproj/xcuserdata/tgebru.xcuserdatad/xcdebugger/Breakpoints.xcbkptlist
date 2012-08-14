@@ -269,11 +269,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
-         timestampString = "366646650.695584"
+         timestampString = "366661979.092239"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
          landmarkName = "@implementation FlickrSinglePhotoViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -283,11 +283,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
-         timestampString = "366646650.695584"
+         timestampString = "366661979.092239"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
          landmarkName = "-viewForZoomingInScrollView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -772,20 +772,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "TopPlaces/PlacesViewController.m"
-         timestampString = "366652735.896721"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
-         landmarkName = "-setupFetchedResultsController"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "TopPlaces/Photo+Create.m"
          timestampString = "366652956.999099"
          startingColumnNumber = "2147483647"
@@ -849,6 +835,172 @@
          startingLineNumber = "18"
          endingLineNumber = "18"
          landmarkName = "+placeWithName:inManagedObjectContext:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
+         timestampString = "366654451.644858"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-documentIsReady:"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__block_global_0"
+               urlString = "file://localhost/Developer/Virtual_vacation/TopPlaces/FlickrSinglePhotoViewController.m"
+               timestampString = "366654451.734651"
+               startingColumnNumber = "2147483647"
+               endingColumnNumber = "2147483647"
+               startingLineNumber = "52"
+               endingLineNumber = "52">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__block_global_1"
+               urlString = "file://localhost/Developer/Virtual_vacation/TopPlaces/FlickrSinglePhotoViewController.m"
+               timestampString = "366654452.084212"
+               startingColumnNumber = "2147483647"
+               endingColumnNumber = "2147483647"
+               startingLineNumber = "52"
+               endingLineNumber = "52">
+            </Location>
+         </Locations>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
+         timestampString = "366654464.062512"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "-documentIsReady:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-setupFetchedResultsController"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/OptionsViewController.m"
+         timestampString = "366661979.092239"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
+         landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "@implementation PlacesViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/PlacesViewController.m"
+         timestampString = "366667788.993663"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "-documentIsReady:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

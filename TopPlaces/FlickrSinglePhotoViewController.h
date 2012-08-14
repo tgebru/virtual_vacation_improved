@@ -11,7 +11,7 @@
 @interface FlickrSinglePhotoViewController : UIViewController
 //@property (weak, nonatomic) IBOutlet UIButton *visitButton;
 //@property (nonatomic, strong) UIImage *image;
-- (void)setImage:(UIImage *)image;
+- (void)setImage:(UIImage *)image forPhotoDictionary:(NSDictionary *)photoDictionary;
 - (IBAction)toggleVisit:(id)sender;
 
 @end

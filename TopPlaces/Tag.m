@@ -13,6 +13,7 @@
 @implementation Tag
 
 @dynamic title;
+@dynamic unique;
 @dynamic photos;
 
 @end

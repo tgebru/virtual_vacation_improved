@@ -9,5 +9,6 @@
 #import "Tag.h"
 
 @interface Tag (Create)
-
++ (Tag *)tagWithName:(NSString *)name
+  inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

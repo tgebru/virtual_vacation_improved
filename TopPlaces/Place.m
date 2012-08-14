@@ -14,6 +14,7 @@
 
 @dynamic date;
 @dynamic name;
+@dynamic unique;
 @dynamic photos;
 
 @end

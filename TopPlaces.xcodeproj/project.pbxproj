@@ -35,10 +35,10 @@
 		7AF1F34115A519C500BA8C74 /* FlickrSinglePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF1F34015A519C500BA8C74 /* FlickrSinglePhotoViewController.m */; };
 		7AF9C69A15C9BA1400656CC5 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9C69915C9BA1400656CC5 /* Cache.m */; };
 		7AFFCBED15D9880E00D66B86 /* Place+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCBEC15D9880E00D66B86 /* Place+Create.m */; };
-		7AFFCBF915D988B200D66B86 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCBF815D988B200D66B86 /* Photo.m */; };
-		7AFFCBFC15D988B200D66B86 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCBFB15D988B200D66B86 /* Place.m */; };
-		7AFFCBFF15D988B300D66B86 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCBFE15D988B300D66B86 /* Tag.m */; };
 		7AFFCC0515D98F7900D66B86 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFFCC0415D98F7900D66B86 /* CoreData.framework */; };
+		7AFFCC1115D9AE0B00D66B86 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCC1015D9AE0A00D66B86 /* Photo.m */; };
+		7AFFCC1415D9AE0F00D66B86 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCC1315D9AE0E00D66B86 /* Place.m */; };
+		7AFFCC1715D9AE1200D66B86 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFCC1615D9AE1000D66B86 /* Tag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,13 +92,13 @@
 		7AF9C69915C9BA1400656CC5 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		7AFFCBEB15D9880E00D66B86 /* Place+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Place+Create.h"; sourceTree = "<group>"; };
 		7AFFCBEC15D9880E00D66B86 /* Place+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Place+Create.m"; sourceTree = "<group>"; };
-		7AFFCBF715D988B200D66B86 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		7AFFCBF815D988B200D66B86 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		7AFFCBFA15D988B200D66B86 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
-		7AFFCBFB15D988B200D66B86 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
-		7AFFCBFD15D988B200D66B86 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		7AFFCBFE15D988B300D66B86 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		7AFFCC0415D98F7900D66B86 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7AFFCC0F15D9AE0900D66B86 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		7AFFCC1015D9AE0A00D66B86 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		7AFFCC1215D9AE0D00D66B86 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		7AFFCC1315D9AE0E00D66B86 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		7AFFCC1515D9AE1000D66B86 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		7AFFCC1615D9AE1000D66B86 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,12 +157,12 @@
 				7AABB1BB15D968DA008D7A28 /* PlacesViewController.h */,
 				7AABB1BC15D968DA008D7A28 /* PlacesViewController.m */,
 				7AABB1C115D982B0008D7A28 /* VacationInfo.xcdatamodeld */,
-				7AFFCBF715D988B200D66B86 /* Photo.h */,
-				7AFFCBF815D988B200D66B86 /* Photo.m */,
-				7AFFCBFD15D988B200D66B86 /* Tag.h */,
-				7AFFCBFE15D988B300D66B86 /* Tag.m */,
-				7AFFCBFA15D988B200D66B86 /* Place.h */,
-				7AFFCBFB15D988B200D66B86 /* Place.m */,
+				7AFFCC1515D9AE1000D66B86 /* Tag.h */,
+				7AFFCC1615D9AE1000D66B86 /* Tag.m */,
+				7AFFCC1215D9AE0D00D66B86 /* Place.h */,
+				7AFFCC1315D9AE0E00D66B86 /* Place.m */,
+				7AFFCC0F15D9AE0900D66B86 /* Photo.h */,
+				7AFFCC1015D9AE0A00D66B86 /* Photo.m */,
 				7AFFCBEB15D9880E00D66B86 /* Place+Create.h */,
 				7AFFCBEC15D9880E00D66B86 /* Place+Create.m */,
 				7AABB1D615D98596008D7A28 /* Photo+Create.h */,
@@ -296,9 +296,9 @@
 				7AABB1D815D98597008D7A28 /* Photo+Create.m in Sources */,
 				7AABB1DB15D985B0008D7A28 /* Tag+Create.m in Sources */,
 				7AFFCBED15D9880E00D66B86 /* Place+Create.m in Sources */,
-				7AFFCBF915D988B200D66B86 /* Photo.m in Sources */,
-				7AFFCBFC15D988B200D66B86 /* Place.m in Sources */,
-				7AFFCBFF15D988B300D66B86 /* Tag.m in Sources */,
+				7AFFCC1115D9AE0B00D66B86 /* Photo.m in Sources */,
+				7AFFCC1415D9AE0F00D66B86 /* Place.m in Sources */,
+				7AFFCC1715D9AE1200D66B86 /* Tag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@
 @interface Tag : NSManagedObject
 
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * unique;
 @property (nonatomic, retain) NSSet *photos;
 @end
 

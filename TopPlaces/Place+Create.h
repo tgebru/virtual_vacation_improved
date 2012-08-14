@@ -9,5 +9,6 @@
 #import "Place.h"
 
 @interface Place (Create)
-
++ (Place *)placeWithName:(NSString *)name
+  inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

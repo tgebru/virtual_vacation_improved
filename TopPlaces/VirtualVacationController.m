@@ -86,9 +86,7 @@
                 [dict writeToFile:vacationPath atomically:YES];
 
                 NSLog(@"empty file");
-            }
-            else {
-                
+            }else {                
                 NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
                 
                 [dict setObject:@"" forKey:input];

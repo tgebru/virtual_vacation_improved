@@ -7,7 +7,42 @@
 //
 
 #import "Photo+Create.h"
+#import "FlickrFetcher.h"
+#import "Tag+Create.h"
+#import "Place+Create.h"
 
 @implementation Photo (Create)
+
++ (Photo *)photoWithFlickrInfo:(NSDictionary *)flickrInfo
+        inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    Photo *photo = nil;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    request.predicate = [NSPredicate predicateWithFormat:@"unique = %@", [flickrInfo objectForKey:FLICKR_PHOTO_ID]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    if (!matches || ([matches count] > 1)) {
+        // handle error
+    } else if ([matches count] == 0) {
+        photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+        photo.unique = [flickrInfo objectForKey:FLICKR_PHOTO_ID];
+        photo.title = [flickrInfo objectForKey:FLICKR_PHOTO_TITLE];
+        //photo.subtitle = [flickrInfo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+        photo.imageUrl = [[FlickrFetcher urlForPhoto:flickrInfo format:FlickrPhotoFormatLarge] absoluteString];
+        photo.takenAt = [Place placeWithName:[flickrInfo objectForKey:FLICKR_PHOTO_PLACE_NAME] inManagedObjectContext:context];
+        //photo.tagName = [Tag tagWithName:[flickrInfo objectForKey:FLICKR_TAGS] inManagedObjectContext:context];
+        photo.visited = [NSNumber numberWithBool:YES];
+        
+    } else {
+        photo = [matches lastObject];
+    }
+    
+    return photo;
+}
 
 @end

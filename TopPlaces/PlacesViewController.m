@@ -66,12 +66,22 @@
                           [self documentIsReady:doc];
                       }];
 }   
+
+- (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Place"];
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    // no predicate because we want ALL the Photographers
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.photoDatabase.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+}
      
 -(void) documentIsReady:(UIManagedDocument *)doc {
     
    
-    //[self setupFetchedResultsController];
-   // [self fetchFlickrDataIntoDocument:self.photoDatabase];
+    [self setupFetchedResultsController];
+    self.photoDatabase = doc;
+   //[self fetchFlickrDataIntoDocument:self.photoDatabase];
     
 
 }
@@ -82,14 +92,7 @@
     return YES;
 }
 
-- (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Places"];
-    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-    // no predicate because we want ALL the Photographers
-    
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.photoDatabase.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-}
+
 /*
 - (void)fetchFlickrDataIntoDocument:(UIManagedDocument *)document
 {

@@ -12,6 +12,7 @@
 #import "Cache.h"
 #import "FlickrPhotoAnnotation.h"
 #import "MapViewController.h"
+#import "FlickrSinglePhotoViewController.h"
 
 
 #define MAX_RESULTS 50
@@ -164,7 +165,8 @@
                 NSLog(@"Do we seg fault here?");
                 self.photoImage= [UIImage imageWithData:imageData];
                 self.navigationItem.rightBarButtonItem = nil;
-                [segue.destinationViewController setImage:self.photoImage];
+                //[segue.destinationViewController setImage:self.photoImage];
+                [segue.destinationViewController setImage:self.photoImage forPhotoDictionary:photo];
             });
         });
     

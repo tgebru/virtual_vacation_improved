@@ -16,6 +16,7 @@
 @dynamic imageUrl;
 @dynamic title;
 @dynamic visited;
+@dynamic unique;
 @dynamic tagName;
 @dynamic takenAt;
 

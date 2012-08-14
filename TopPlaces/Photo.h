@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * visited;
+@property (nonatomic, retain) NSString * unique;
 @property (nonatomic, retain) Tag *tagName;
 @property (nonatomic, retain) Place *takenAt;
 

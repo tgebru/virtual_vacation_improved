@@ -24,35 +24,48 @@ static NSMutableDictionary *vacationToDocumentMapping;
     }
     
     UIManagedDocument *doc = [vacationToDocumentMapping objectForKey:vacationName];
+    //NSLog(@"%@, %@", __FUNCTION__, [vacationToDocumentMapping objectForKey:vacationName]);
     
     if(doc) {
            
          if (doc.documentState == UIDocumentStateClosed) {
 
              [doc openWithCompletionHandler:^(BOOL success) 
-              { if (success) completionBlock (doc);}];
+              { 
+                  if (success) completionBlock (doc);
+                  else NSLog(@"error opening existing db");
+              }];
 
          } else if (doc.documentState == UIDocumentStateNormal) {
          // already open and ready to use
              completionBlock (doc);
+             NSLog(@"opened existing db successfully");
          }
     }
     else {
         
         NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory 
                                                              inDomains:NSUserDomainMask] lastObject];
-        url = [url URLByAppendingPathComponent:vacationName];
+        
+        NSString *anotherVacationName = @"My Vacation.db";
+        url = [url URLByAppendingPathComponent: anotherVacationName];//vacationName];
         // url is now "<Documents Directory>/Default Photo Database"
         UIManagedDocument *database = [[UIManagedDocument alloc] initWithFileURL:url]; // setter will create this for us on disk
         
         [vacationToDocumentMapping setObject:database forKey:vacationName];
         
-    
-        [database saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) 
-         { if (success) completionBlock (database);}]; 
-
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]){
+            
+            [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) 
+             { 
+                 if (success) {
+                     completionBlock (database);
+                     NSLog(@"%s, saved successfully\n", __FUNCTION__);
+                 }else 
+                     NSLog(@"%s, problem saving", __FUNCTION__);}];
+        }
     }
-       
+    
 }
 
 

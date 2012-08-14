@@ -224,7 +224,7 @@
                 [self saveToNSDefaults:photo];
                 
                 self.navigationItem.rightBarButtonItem = nil;
-                [segue.destinationViewController setImage:self.photoImage];
+                [segue.destinationViewController setImage:self.photoImage forPhotoDictionary:photo];
                
             });
         });

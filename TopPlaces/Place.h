@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * date;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * unique;
 @property (nonatomic, retain) NSSet *photos;
 @end
 

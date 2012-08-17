@@ -39,7 +39,7 @@
         }
         //photo.subtitle = [flickrInfo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
         photo.imageUrl = [[FlickrFetcher urlForPhoto:flickrInfo format:FlickrPhotoFormatLarge] absoluteString];
-        photo.takenAt = [Place placeWithName:[flickrInfo objectForKey:FLICKR_PHOTO_PLACE_NAME] inManagedObjectContext:context];
+        photo.takenAt = [Place placeWithName:flickrInfo inManagedObjectContext:context];
         //photo.tagName = [Tag tagWithName:[flickrInfo objectForKey:FLICKR_TAGS] inManagedObjectContext:context];
         photo.visited = [NSNumber numberWithBool:YES];
         

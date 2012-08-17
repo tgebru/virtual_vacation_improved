@@ -173,6 +173,8 @@
 				7AFFCBEC15D9880E00D66B86 /* Place+Create.m */,
 				7AABB1D615D98596008D7A28 /* Photo+Create.h */,
 				7AABB1D715D98596008D7A28 /* Photo+Create.m */,
+				7ACE419815DEA3A5003F0B53 /* Photo+Delete.h */,
+				7ACE419915DEA3A5003F0B53 /* Photo+Delete.m */,
 				7AABB1D915D985AE008D7A28 /* Tag+Create.h */,
 				7AABB1DA15D985AF008D7A28 /* Tag+Create.m */,
 				7AABB1BE15D968F4008D7A28 /* TagsViewController.h */,
@@ -202,8 +204,6 @@
 				7A3E275715D15BFD007AC418 /* FlickrPhotoAnnotation.m */,
 				7A3E275915D160FD007AC418 /* MapViewController.h */,
 				7A3E275A15D160FE007AC418 /* MapViewController.m */,
-				7ACE419815DEA3A5003F0B53 /* Photo+Delete.h */,
-				7ACE419915DEA3A5003F0B53 /* Photo+Delete.m */,
 				7ACE419C15DEA7E6003F0B53 /* PhotoListViewController.h */,
 				7ACE419D15DEA7E7003F0B53 /* PhotoListViewController.m */,
 			);

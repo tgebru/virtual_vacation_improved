@@ -9,6 +9,7 @@
 #import "PhotoListViewController.h"
 #import "VacationHelper.h"
 #import "Photo.h"
+#import "Place.h"
 #import "Cache.h"
 #import "FlickrFetcher.h"
 #import "FlickrSinglePhotoViewController.h"
@@ -184,7 +185,10 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     Photo *photo1 = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    NSDictionary *photo = [NSDictionary dictionaryWithObject:photo1.unique forKey:FLICKR_PHOTO_ID];
+    NSArray *keys = [NSArray arrayWithObjects:FLICKR_PLACE_ID, FLICKR_PHOTO_ID, nil];
+    NSArray *objects = [NSArray arrayWithObjects:photo1.takenAt.unique, photo1.unique, nil];
+    NSDictionary *photo = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+  
     //NSLog(@"prepare for segue %@", [sender stringValue]);
     NSLog(@"inside prepareForSegue");
         

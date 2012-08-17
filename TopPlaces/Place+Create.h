@@ -9,6 +9,6 @@
 #import "Place.h"
 
 @interface Place (Create)
-+ (Place *)placeWithName:(NSString *)name
++ (Place *)placeWithName:(NSDictionary *)flickrInfo
   inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

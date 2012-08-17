@@ -31,7 +31,12 @@
     } else if ([matches count] == 0) {
         photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
         photo.unique = [flickrInfo objectForKey:FLICKR_PHOTO_ID];
-        photo.title = [flickrInfo objectForKey:FLICKR_PHOTO_TITLE];
+        NSString *title = [flickrInfo objectForKey:FLICKR_PHOTO_TITLE];
+        if (title && ![title compare:@""]==NSOrderedSame){
+            photo.title = [flickrInfo objectForKey:FLICKR_PHOTO_TITLE];
+        } else {
+            photo.title = @"Unknown";
+        }
         //photo.subtitle = [flickrInfo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
         photo.imageUrl = [[FlickrFetcher urlForPhoto:flickrInfo format:FlickrPhotoFormatLarge] absoluteString];
         photo.takenAt = [Place placeWithName:[flickrInfo objectForKey:FLICKR_PHOTO_PLACE_NAME] inManagedObjectContext:context];

@@ -8,9 +8,9 @@
 
 #import "FlickrSinglePhotoViewController.h"
 #import "VacationHelper.h"
-//#import "Photo+Create.h"
 #import <CoreData/CoreData.h>
 #import "Photo+Create.h"
+#import "Photo+Delete.h"
 #import "Photo.h"
 
 @interface FlickrSinglePhotoViewController() <UIScrollViewDelegate>
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSDictionary *photoDictionary;
 //@property (nonatomic, strong) UIImage *image;
 
-//-(void) documentIsReady:(UIManagedDocument *)doc;
+-(void) documentIsReady:(UIManagedDocument *)doc :(NSString *)actionToDo;
 
 @end
 
@@ -38,7 +38,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 }
 
--(void) documentIsReady:(UIManagedDocument *)doc {
+-(void) documentIsReady:(UIManagedDocument *)doc :(NSString *)actionToDo {
     
     if (doc.documentState == UIDocumentStateNormal){
         
@@ -46,7 +46,12 @@
         dispatch_async(fetchQ, ^{
             //Save photo to database            
             [doc.managedObjectContext performBlock:^{ // perform in the NSMOC's safe thread (main thread)
+                
+                if([actionToDo compare:@"create"] == NSOrderedSame) {
                 [Photo photoWithFlickrInfo:self.photoDictionary inManagedObjectContext:doc.managedObjectContext];
+                } else {
+                [Photo deleteWithFlickrInfo:self.photoDictionary inManagedObjectContext:doc.managedObjectContext];
+                }
                 
                 //Save the document
                 [doc saveToURL:doc.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
@@ -72,13 +77,18 @@
             //save to my vacation database: the database name is hard coded
             [VacationHelper openVacation:@"My Vacation"
                               usingBlock:^ (UIManagedDocument *doc){
-                                  [self documentIsReady:doc];
+                                  [self documentIsReady:doc :@"create"];
                               }];
 
             
             [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
         }else {
             //TODO: delete from db
+            [VacationHelper openVacation:@"My Vacation"
+                              usingBlock:^ (UIManagedDocument *doc){
+                                  [self documentIsReady:doc :@"delete"];
+                              }];
+            
             [visitButton setTitle:@"Visit" forState:UIControlStateNormal];
             
             //Delete from Database 

@@ -24,10 +24,11 @@
 @end
 
 @implementation FlickrSinglePhotoViewController
-//@synthesize visitButton;
+@synthesize visitButton = _visitButton;
 @synthesize imageView ;
 @synthesize scrollView;
 @synthesize photoDictionary = _photoDictionary;
+@synthesize visitedPic = _visitedPic;
 //@synthesize image =_image;
 
 - (void) showSpinner
@@ -107,6 +108,9 @@
     [self.imageView setImage:image];
     [self.imageView setNeedsDisplay];
     self.photoDictionary = photoDictionary;
+    if(self.visitedPic == [NSNumber numberWithBool:YES]) {
+       [self.visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];       
+    }
     [self.scrollView setNeedsDisplay];
     self.navigationItem.rightBarButtonItem = nil;
 }
@@ -128,14 +132,21 @@
     NSLog(@"Flickr: %s", __FUNCTION__);
 
     //[self.imageView setImage:self.image];
-
+    
     [super viewWillAppear:animated];
-
-
+    
+ /*   
+    if(self.visitedPic == [NSNumber numberWithBool:YES]) {
+        [[self.visitButton titleLabel] setText:@"Unvisit"];
+    }
+ */
     //self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
     self.scrollView.delegate = self;
     self.scrollView.contentSize = self.imageView.image.size;
 
+    NSLog(@"%s, parent: %@", __FUNCTION__, [self.parentViewController title]);
+    NSLog(@"parent: %@", [self.parentViewController nibName]);
+    
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

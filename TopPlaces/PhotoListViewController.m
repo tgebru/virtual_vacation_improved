@@ -9,9 +9,13 @@
 #import "PhotoListViewController.h"
 #import "VacationHelper.h"
 #import "Photo.h"
+#import "Cache.h"
+#import "FlickrFetcher.h"
+#import "FlickrSinglePhotoViewController.h"
 
 @interface PhotoListViewController() 
 @property (nonatomic, strong)UIManagedDocument *photoDatabase;
+@property (nonatomic, strong) Cache *flickrPhotoCache;
 
 @end
 
@@ -21,6 +25,7 @@
 @synthesize listParent = _listParent;
 @synthesize vacationName=_vacationName;
 @synthesize photoDatabase = _photoDatabase;
+@synthesize flickrPhotoCache = _flickrPhotoCache;
 
 #pragma mark - Table view data source
 
@@ -48,6 +53,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.flickrPhotoCache = [[Cache alloc]init];
+    [self.flickrPhotoCache getCache];
+    
     
 }
 
@@ -171,16 +179,51 @@
 }
 
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-//    Photo *photographer = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    if ([segue.destinationViewController respondsToSelector:@selector(setPhotographer:)]) {
-//        [segue.destinationViewController performSelector:@selector(setPhoto:) withObject:photographer];
-//    }
-//    
-//    
-//    
-//    
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    Photo *photo1 = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSDictionary *photo = [NSDictionary dictionaryWithObject:photo1.unique forKey:FLICKR_PHOTO_ID];
+    //NSLog(@"prepare for segue %@", [sender stringValue]);
+    NSLog(@"inside prepareForSegue");
+        
+        //Fork a thread to download photos
+        dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            NSURL    *photoUrl;
+            NSData   *imageData;
+            NSString *urlString;
+            
+            //NSLog(@"Just started thread");
+            if ([self.flickrPhotoCache isInCache:photo]){
+                urlString= [self.flickrPhotoCache readImageFromCache:photo];
+                imageData = [NSData dataWithContentsOfFile:urlString];
+            }else {
+                photoUrl = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
+                imageData = [NSData dataWithContentsOfURL:photoUrl];   
+            }
+            //NSLog(@"Downloaded Image: %d", [imageData length]);
+            dispatch_async(dispatch_get_main_queue(), ^{            
+                UIImage *photoImage= [UIImage imageWithData:imageData];
+                //NSLog(@"Downloaded Image height: %f", [self.photoImage size].height);
+                
+                //Save photo to cache
+                [self.flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
+                NSLog(@"done caching");
+                
+                //save to NSUserDefaults  
+                //[self saveToNSDefaults:photo];
+                
+               // self.navigationItem.rightBarButtonItem = nil;
+                //[segue.destinationViewController setVisitedPic:YES];
+                [segue.destinationViewController setVisitedPic: [NSNumber numberWithBool:YES]];
+                [segue.destinationViewController setImage:photoImage forPhotoDictionary:photo];
+                
+            });
+        });
+        
+        dispatch_release(downloadQueue);
+}
+
 @end

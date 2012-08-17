@@ -1115,5 +1115,19 @@
          landmarkName = "+deleteWithFlickrInfo:inManagedObjectContext:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/VacationHelper.m"
+         timestampString = "366938674.706639"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
+         landmarkName = "+openVacation:usingBlock:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

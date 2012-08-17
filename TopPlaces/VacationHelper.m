@@ -59,10 +59,26 @@ static NSMutableDictionary *vacationToDocumentMapping;
             [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) 
              { 
                  if (success) {
-                     completionBlock (database);
-                     NSLog(@"%s, saved successfully\n", __FUNCTION__);
+                     completionBlock(database);
                  }else 
-                     NSLog(@"%s, problem saving", __FUNCTION__);}];
+                     NSLog(@"%s, problem creating db", __FUNCTION__);}];
+        }
+        else {
+            NSLog(@"DB exists on disk, no need to create");
+            if (database.documentState == UIDocumentStateClosed) {
+                
+                [database openWithCompletionHandler:^(BOOL success) 
+                 { 
+                     if (success) completionBlock (database);
+                     else NSLog(@"error opening existing db");
+                 }];
+                
+            } else if (database.documentState == UIDocumentStateNormal) {
+                // already open and ready to use
+                NSLog(@"opened existing db successfully");
+                completionBlock (database);
+            }
+
         }
     }
     

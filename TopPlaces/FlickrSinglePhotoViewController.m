@@ -84,23 +84,19 @@
             
             [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
         }else {
-            //TODO: delete from db
+            //delete from db
             [VacationHelper openVacation:@"My Vacation"
                               usingBlock:^ (UIManagedDocument *doc){
                                   [self documentIsReady:doc :@"delete"];
                               }];
             
             [visitButton setTitle:@"Visit" forState:UIControlStateNormal];
-            
-            //Delete from Database 
-            
+                        
         }
     }
 
-    }
+}
 
-
-//- (void)setImage:(UIImage *)image
 - (void)setImage:(UIImage *)image forPhotoDictionary:(NSDictionary *)photoDictionary
 {
     NSLog(@"Flickr: %s", __FUNCTION__);
@@ -119,6 +115,7 @@
 {
     NSLog(@"Flickr: %s", __FUNCTION__);
     [super viewDidLoad];
+    if (!self.imageView.image) {[self showSpinner];}
 
 }
 

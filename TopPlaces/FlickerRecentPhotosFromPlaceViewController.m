@@ -53,6 +53,8 @@
     self.flickrPhotoCache = [[Cache alloc]init];
     [self.flickrPhotoCache getCache];
     
+    [self showSpinner];
+    
     //Fork a thread to download photos
     dispatch_queue_t flickrDownloaderQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(flickrDownloaderQueue, ^{
@@ -153,16 +155,13 @@
 
 - (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
 {
-    __block NSData *data;
-    //Download the flickr image in another thread
-    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr thumbnail downloader", NULL);
-    [self showSpinner];  
-    dispatch_async(downloadQueue, ^{
-        FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
-        NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
-        data = [NSData dataWithContentsOfURL:url];
-        NSLog (@"got Thumbnail");
-    });
+    NSData *data;
+  
+    FlickrPhotoAnnotation *fpa = (FlickrPhotoAnnotation *)annotation;
+    NSURL *url = [FlickrFetcher urlForPhoto:fpa.photo format:FlickrPhotoFormatSquare];
+    data = [NSData dataWithContentsOfURL:url];
+    NSLog (@"got Thumbnail");
+
     return data ? [UIImage imageWithData:data] : nil;
 }
 
@@ -197,7 +196,7 @@
     
         //Fork a thread to download photos
         dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
-        [self showSpinner];  
+        //[self showSpinner];  
         dispatch_async(downloadQueue, ^{
             NSURL    *photoUrl;
             NSData   *imageData;
@@ -219,13 +218,12 @@
                 //Save photo to cache
                 [self.flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
                 NSLog(@"done caching");
-            
+                
                 //save to NSUserDefaults  
                 [self saveToNSDefaults:photo];
                 
-                self.navigationItem.rightBarButtonItem = nil;
+             //   self.navigationItem.rightBarButtonItem = nil;
                 [segue.destinationViewController setImage:self.photoImage forPhotoDictionary:photo];
-                 [segue.destinationViewController setImage:self.photoImage forPhotoDictionary:photo];
                
             });
         });

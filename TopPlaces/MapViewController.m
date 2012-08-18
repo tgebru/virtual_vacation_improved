@@ -122,10 +122,18 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
 {
-    UIImage *image = [self.delegate mapViewController:self imageForAnnotation:aView.annotation];
-    [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
-    NSLog(@"We have selected an annotation view");
-
+     NSLog(@"We have selected an annotation view");
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr thumbnail downloader", NULL);
+    [self showSpinner]; 
+    dispatch_async(downloadQueue, ^{
+        //[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];//simulated network latency
+        UIImage *image = [self.delegate mapViewController:self imageForAnnotation:aView.annotation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [(UIImageView *)aView.leftCalloutAccessoryView setImage:image]; 
+            self.navigationItem.rightBarButtonItem = nil;
+        });
+    });
+    dispatch_release(downloadQueue);
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control

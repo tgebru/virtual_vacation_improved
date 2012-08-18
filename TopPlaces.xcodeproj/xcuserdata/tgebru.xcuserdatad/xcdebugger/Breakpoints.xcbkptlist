@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366218237.729701"
+         timestampString = "367000169.360732"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366218237.729701"
+         timestampString = "367000169.360732"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
+         startingLineNumber = "128"
+         endingLineNumber = "128"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366218237.729701"
+         timestampString = "367000169.360732"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
+         startingLineNumber = "149"
+         endingLineNumber = "149"
          landmarkName = "@implementation FlickerPhotosViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366218237.729701"
+         timestampString = "367000169.360732"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "146"
-         endingLineNumber = "146">
+         startingLineNumber = "152"
+         endingLineNumber = "152">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -117,11 +117,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrRecentPhotosViewController.m"
-         timestampString = "366998610.271021"
+         timestampString = "366999712.622955"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "178"
-         endingLineNumber = "178">
+         startingLineNumber = "179"
+         endingLineNumber = "179">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -477,11 +477,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickerPhotosViewController.m"
-         timestampString = "366218237.729701"
+         timestampString = "367000169.360732"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -757,11 +757,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrRecentPhotosViewController.m"
-         timestampString = "366998610.271021"
+         timestampString = "366999712.622955"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -165,6 +165,7 @@
                 NSLog(@"Do we seg fault here?");
                 self.photoImage= [UIImage imageWithData:imageData];
                 self.navigationItem.rightBarButtonItem = nil;
+                [segue.destinationViewController setVisitedPic: [NSNumber numberWithBool:YES]];
                 [segue.destinationViewController setImage:self.photoImage forPhotoDictionary:photo];
             });
         });

@@ -84,6 +84,12 @@
     dispatch_release(downloadQueue);  
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: YES];
+    self.navigationController.toolbarHidden=NO;
+}
+
 - (void)setPhotos:(NSArray *)photos
 {
     if (_photos != photos){

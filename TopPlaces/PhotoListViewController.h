@@ -10,12 +10,9 @@
 #import "CoreDataTableViewController.h"
 
 @interface PhotoListViewController : CoreDataTableViewController
-{
-    NSString * listParent;
-    NSString * vacationName;
-}
+
 @property (nonatomic, strong) NSString * listParent;
 @property (nonatomic, strong) NSString * vacationName;
-
+@property (nonatomic, assign) BOOL cameFromTags;
 @end
 

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreDataTableViewController.h"
 
-@interface TagsViewController : UITableViewController
-{
-     NSString *vacationName;
-}
+
+@interface TagsViewController : CoreDataTableViewController
 @end

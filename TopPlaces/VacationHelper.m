@@ -27,7 +27,6 @@ static NSMutableDictionary *vacationToDocumentMapping;
     //NSLog(@"%@, %@", __FUNCTION__, [vacationToDocumentMapping objectForKey:vacationName]);
     
     if(doc) {
-           
          if (doc.documentState == UIDocumentStateClosed) {
 
              [doc openWithCompletionHandler:^(BOOL success) 
@@ -36,7 +35,8 @@ static NSMutableDictionary *vacationToDocumentMapping;
                   else NSLog(@"error opening existing db");
               }];
 
-         } else if (doc.documentState == UIDocumentStateNormal) {
+         } 
+        else if (doc.documentState == UIDocumentStateNormal) {
          // already open and ready to use
              completionBlock (doc);
              NSLog(@"opened existing db successfully");
@@ -50,6 +50,7 @@ static NSMutableDictionary *vacationToDocumentMapping;
         NSString *anotherVacationName = @"My Vacation.db";
         url = [url URLByAppendingPathComponent: anotherVacationName];//vacationName];
         // url is now "<Documents Directory>/Default Photo Database"
+        
         UIManagedDocument *database = [[UIManagedDocument alloc] initWithFileURL:url]; // setter will create this for us on disk
         
         [vacationToDocumentMapping setObject:database forKey:vacationName];
@@ -60,6 +61,7 @@ static NSMutableDictionary *vacationToDocumentMapping;
              { 
                  if (success) {
                      completionBlock(database);
+                     NSLog(@"%s, successfully created db for first time", __FUNCTION__);
                  }else 
                      NSLog(@"%s, problem creating db", __FUNCTION__);}];
         }

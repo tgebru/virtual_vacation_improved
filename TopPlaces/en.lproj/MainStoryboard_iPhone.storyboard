@@ -301,7 +301,7 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="aet-oo-HCT" kind="push" id="Hgd-4z-6QI"/>
+                                            <segue destination="aet-oo-HCT" kind="push" identifier="goToPlaces" id="Hgd-4z-6QI"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="J8F-wC-liR" style="IBUITableViewCellStyleDefault" id="1Vy-6X-Xjg">
@@ -323,7 +323,7 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="fBO-Sa-oiV" kind="push" id="Uad-TX-ZyD"/>
+                                            <segue destination="fBO-Sa-oiV" kind="push" identifier="goToTags" id="Uad-TX-ZyD"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="1za-jk-B3u">
@@ -638,7 +638,7 @@
         <class className="PlacesViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesViewController.h"/>
         </class>
-        <class className="TagsViewController" superclassName="UITableViewController">
+        <class className="TagsViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TagsViewController.h"/>
         </class>
         <class className="VirtualVacationController" superclassName="UITableViewController">
@@ -654,8 +654,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WLn-9X-P8t"/>
-        <segue reference="9aH-VU-rSi"/>
+        <segue reference="4PM-qn-qU0"/>
         <segue reference="bvo-J2-m51"/>
+        <segue reference="WLn-9X-P8t"/>
     </inferredMetricsTieBreakers>
 </document>

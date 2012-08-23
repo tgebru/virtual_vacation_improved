@@ -76,6 +76,7 @@
 {
     if([segue.destinationViewController respondsToSelector:@selector(setVacationName:)] ){
       //  NSLog(@"responds to selector"); 
+        //[segue.destinationViewController performSelector:@selector(setVacationName:) withObject:self.vacationDatabaseName];
         [segue.destinationViewController performSelector:@selector(setVacationName:) withObject:self.vacationDatabaseName];
         }    
 }

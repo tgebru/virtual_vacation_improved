@@ -10,8 +10,8 @@
 #import "CoreDataTableViewController.h"
 
 @interface PlacesViewController : CoreDataTableViewController
-{
-    NSString *vacationName;
-}
+//{
+//    NSString *vacationName;
+//}
 
 @end

@@ -11,8 +11,6 @@
 #import "VacationHelper.h"
 #import "Place.h"
 #import "PhotoListViewController.h"
-//#import "Photographer.h"
-//#import "Photo+Flickr.h"
 
 @interface PlacesViewController() 
 @property (nonatomic, strong) UIManagedDocument *photoDatabase;

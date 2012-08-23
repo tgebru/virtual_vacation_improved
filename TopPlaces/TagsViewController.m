@@ -7,102 +7,78 @@
 //
 
 #import "TagsViewController.h"
+#import "FlickrFetcher.h"
+#import "VacationHelper.h"
+#import "Tag.h"
+#import "PhotoListViewController.h"
 
 @interface TagsViewController() 
-//@property (nonatomic, strong) UIManagedDocument *photoDatabase;
+@property (nonatomic, strong) UIManagedDocument *photoDatabase;
 @property (nonatomic, strong) NSString *vacationName;
-
-//-(void) documentIsReady:(UIManagedDocument *) doc;
-
 @end
 
 
 @implementation TagsViewController
 
-@synthesize vacationName;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
+@synthesize vacationName = _vacationName;
+@synthesize photoDatabase=_photoDatabase;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
-- (void)viewDidUnload
+- (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    NSLog(@"TagsList: %s", __FUNCTION__);
+
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Tag"];
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    // no predicate because we want ALL the Photographers
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.photoDatabase.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+}
+
+-(void) documentIsReady:(UIManagedDocument *)doc {
+    NSLog(@"TagsList: %s", __FUNCTION__);
+
+    self.photoDatabase = doc;
+    [self setupFetchedResultsController];
+    
+    //[self fetchFlickrDataIntoDocument:self.photoDatabase];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"TagsList: %s", __FUNCTION__);
+
     [super viewWillAppear:animated];
     [self setTitle:self.vacationName];
-}
+    [VacationHelper openVacation:self.vacationName
+                      usingBlock:^ (UIManagedDocument *doc){
+                          [self documentIsReady:doc];
+                      }];
+}  
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidUnload
 {
-    [super viewDidAppear:animated];
-}
+    NSLog(@"TagsList: %s", __FUNCTION__);
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-//#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-//#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"TagsList: %s", __FUNCTION__);
+
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -110,61 +86,30 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    
+    // ask NSFetchedResultsController for the NSMO at the row in question
+    Tag *tag = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    // Then configure the cell using it ...
+    cell.textLabel.text = tag.title;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d tags", [tag.photos count]];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    Tag *tag = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    ////    if ([segue.destinationViewController respondsToSelector:@selector(setPhotographer:)]) {
+    ////        [segue.destinationViewController performSelector:@selector(setPhoto:) withObject:photographer];
+    ////    }
+    //  
+    //    // updateTag/titleParent
+    //objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+    [segue.destinationViewController setCameFromTags:YES];
+    [segue.destinationViewController setVacationName:self.vacationName];
+    [segue.destinationViewController setListParent:tag.title];
+    //    
+    //    
+    NSLog(@"TagsList: Inside Prepare for Segue Places View controller");
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
-
 @end

@@ -40,7 +40,25 @@
         //photo.subtitle = [flickrInfo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
         photo.imageUrl = [[FlickrFetcher urlForPhoto:flickrInfo format:FlickrPhotoFormatLarge] absoluteString];
         photo.takenAt = [Place placeWithName:flickrInfo inManagedObjectContext:context];
-        //photo.tagName = [Tag tagWithName:[flickrInfo objectForKey:FLICKR_TAGS] inManagedObjectContext:context];
+        
+        //Get Photo Tags from Flickr (they are separated by space)
+        NSArray *tags = [[flickrInfo objectForKey:FLICKR_TAGS]componentsSeparatedByString:@" "];
+        NSMutableArray *tagsWithCapFirstLetter = [[NSMutableArray alloc]initWithCapacity:[tags count]];
+        
+        int i=0;
+        for (NSString *tag in tags){
+            if ([tag rangeOfString:@":"].location == NSNotFound){
+                NSString *tagWithCapFirstLetter = [[tag lowercaseString] stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[tag substringToIndex:1] uppercaseString]];
+                [tagsWithCapFirstLetter insertObject:tagWithCapFirstLetter atIndex:i];
+                i++;        
+                NSLog(@"%@", tagWithCapFirstLetter);
+            }
+        }
+          
+        photo.tagName = [Tag tagsWithPhoto:photo 
+                        andArrayOfTagNames:tagsWithCapFirstLetter
+                        inManagedObjectContext:context];
+      
         photo.visited = [NSNumber numberWithBool:YES];
         
     } else {

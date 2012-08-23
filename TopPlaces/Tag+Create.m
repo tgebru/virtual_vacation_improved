@@ -9,30 +9,41 @@
 #import "Tag+Create.h"
 
 @implementation Tag (Create)
-+ (Tag *)tagWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context
++ (NSSet*)tagsWithPhoto:(Photo *)photo
+    andArrayOfTagNames:(NSArray *) arrayOfTagNames
+    inManagedObjectContext:(NSManagedObjectContext *)context
+
 {
     Tag *tag= nil;
+    NSMutableSet *mutableTags= [[NSMutableSet alloc]init];
+    NSSet *tags = [[NSSet alloc]init];
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tag"];
-    request.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
-    NSError *error = nil;
-    NSArray *tags = [context executeFetchRequest:request error:&error];
-    
-    if (!tags || ([tags count] > 1)) {
-        // handle error
-    } else if (![tags count]) {
-        tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag"
-                                              inManagedObjectContext:context];
-        tag.title = name;
-    } else {
-        tag = [tags lastObject];
+    for (NSString *name in arrayOfTagNames){
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tag"];
+        request.predicate = [NSPredicate predicateWithFormat:@"title = %@", name];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+        request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        
+        NSError *error = nil;
+        NSArray *tagsArray = [context executeFetchRequest:request error:&error];
+        
+        if (!tagsArray || ([tagsArray count] > 1)) {
+            // handle error
+        } else if (![tagsArray count]) {
+            tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                                                inManagedObjectContext:context];
+            tag.title = name;
+            tag.photos = [tag.photos setByAddingObject:photo];
+            [mutableTags addObject:tag];
+        } else {
+            tag = [tagsArray lastObject];
+            [mutableTags addObject:tag];
+        }
+        
     }
     
-    return tag;
-
+    tags = [NSSet setWithSet:mutableTags];
+    return tags;
 }
 
 @end

@@ -11,7 +11,7 @@
 @interface FlickerPhotosViewController : UITableViewController 
 #define RECENTS_KEY @"Recent Photos"
 @property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
-//- (void) showSpinner;
+- (void) showSpinner;
 //- (void)setPhotos:(NSArray *)photos;
 @end
 

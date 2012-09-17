@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "FlickerPhotosViewController.h"
 #import "FlickerRecentPhotosFromPlaceViewController.h"
 #import "Cache.h"
 

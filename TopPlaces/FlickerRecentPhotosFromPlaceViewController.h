@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlickrRecentPhotosViewController.h"
+#import "Cache.h"
+#import "FlickrFetcher.h"
+#import "FlickrSinglePhotoViewController.h"
+#import "FlickrPhotoAnnotation.h"
+#import "MapViewController.h"
+//#import "FlickerPhotoViewController.h
 
-@interface FlickerRecentPhotosFromPlaceViewController :UITableViewController//: FlickerPhotosViewController
+#define MAX_RESULTS 50
 #define RECENTS_KEY @"Recent Photos"
-- (void)setPlaceForPhotos: (NSDictionary *)place;
-//@property (nonatomic, strong) NSDictionary *place;
-//@property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
 
+@interface FlickerRecentPhotosFromPlaceViewController : UITableViewController //FlickerPhotosViewController//
+- (void)setPlaceForPhotos:(NSDictionary *)place;
 @end

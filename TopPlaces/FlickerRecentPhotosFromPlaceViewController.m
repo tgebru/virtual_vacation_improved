@@ -7,13 +7,13 @@
 
 //Download a certain number of pictures specified by MAX_RESULTS from Flickr
 #import "FlickerRecentPhotosFromPlaceViewController.h"
-#import "FlickrFetcher.h"
-#import "FlickrSinglePhotoViewController.h"
-#import "FlickrPhotoAnnotation.h"
-#import "MapViewController.h"
-#import "Cache.h"
+//#import "FlickrFetcher.h"
+//#import "FlickrSinglePhotoViewController.h"
+//#import "FlickrPhotoAnnotation.h"
+//#import "MapViewController.h"
 
 #define MAX_RESULTS 50
+#define RECENTS_VIEWCONTROLLER @"Recent Photos"
 
 @interface FlickerRecentPhotosFromPlaceViewController()
 @property (nonatomic, strong) UIImage *photoImage;
@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSDictionary *photoForAnnotation;
 @property (nonatomic, strong) NSDictionary *place;
 @property (nonatomic, strong) Cache *flickrPhotoCache;
+@property (nonatomic, strong) NSNumber *isRecentlyViewedPhotos;
+@property (nonatomic, strong) NSNumber *visited;
 
 @end
 
@@ -30,8 +32,11 @@
 @synthesize photos = _photos;
 @synthesize flickrPhotoCache = _flickrPhotoCache;
 @synthesize photoForAnnotation = _photoForAnnotation;
+@synthesize isRecentlyViewedPhotos = _isRecentlyViewedPhotos;
+@synthesize visited= _visited;
 
 #pragma mark - View lifecycle
+
 
 - (void) showSpinner
 {
@@ -41,32 +46,16 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 }
 
-- (IBAction)goToMap:(id)sender {
+
+- (IBAction)goToMap:(id)sender {       
+    if ( self.isRecentlyViewedPhotos)self.visited =[NSNumber numberWithBool:YES];
     [self performSegueWithIdentifier:@"toMapFromListOfPhotos" sender:sender];
 }
 
-- (void) viewDidLoad
+- (void) initializeCache
 {
-    [super viewDidLoad];
-     self.navigationController.toolbarHidden=NO;
-   
     self.flickrPhotoCache = [[Cache alloc]init];
     [self.flickrPhotoCache getCache];
-    
-    [self showSpinner];
-    
-    //Fork a thread to download photos
-    dispatch_queue_t flickrDownloaderQueue = dispatch_queue_create("flickr downloader", NULL);
-    dispatch_async(flickrDownloaderQueue, ^{
-        NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.photos = photos;
-            self.navigationItem.rightBarButtonItem = nil;
-        });
-    });
-    
-    dispatch_release(flickrDownloaderQueue);
-    
 }
 
 - (void)setPhotos:(NSArray *)photos
@@ -82,6 +71,42 @@
     self.place = place ;
 }
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+     self.navigationController.toolbarHidden=NO;   
+    [self initializeCache];
+    
+    if ( [self.navigationController.tabBarItem.title isEqualToString:RECENTS_VIEWCONTROLLER]){
+        self.isRecentlyViewedPhotos = [NSNumber numberWithBool:YES];
+        NSArray *photos = [[NSUserDefaults standardUserDefaults] objectForKey:RECENTS_KEY];
+        self.photos = photos;
+
+    }else {
+         self.isRecentlyViewedPhotos = [NSNumber numberWithBool:NO];
+        [self showSpinner];
+        
+        //Fork a thread to download photos
+        dispatch_queue_t flickrDownloaderQueue = dispatch_queue_create("flickr downloader", NULL);
+        dispatch_async(flickrDownloaderQueue, ^{
+            NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.photos = photos;
+                self.navigationItem.rightBarButtonItem = nil;
+            });
+        });
+        
+        dispatch_release(flickrDownloaderQueue);    
+    }
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.toolbarHidden=NO;   
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.photos count];
@@ -90,8 +115,8 @@
 #pragma mark - Table view delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Flickr Photos For Place";
-    
+    static NSString *CellIdentifier;    
+    CellIdentifier = @"Flickr Photos For Place";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -215,14 +240,15 @@
                 self.photoImage= [UIImage imageWithData:imageData];
                 //NSLog(@"Downloaded Image height: %f", [self.photoImage size].height);
             
-                //Save photo to cache
-                [self.flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
-                NSLog(@"done caching");
-                
-                //save to NSUserDefaults  
-                [self saveToNSDefaults:photo];
-                
-             //   self.navigationItem.rightBarButtonItem = nil;
+                if (!self.isRecentlyViewedPhotos.boolValue){
+                    //Save photo to cache
+                    [self.flickrPhotoCache writeImageToCache:imageData forPhoto:photo fromUrl:photoUrl]; //update photo cache
+                    NSLog(@"done caching");
+                    //save to NSUserDefaults  
+                    [self saveToNSDefaults:photo];
+                }
+                self.navigationItem.rightBarButtonItem = nil;
+                if (self.visited) [segue.destinationViewController setVisitedPic: [NSNumber numberWithBool:YES]];
                 [segue.destinationViewController setImage:self.photoImage forPhotoDictionary:photo];
                
             });

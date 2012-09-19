@@ -89,6 +89,11 @@
     NSLog(@"%s", __FUNCTION__);
 }  
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    if([self.tableView numberOfRowsInSection:0]==0)[self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];

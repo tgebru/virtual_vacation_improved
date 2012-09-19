@@ -49,6 +49,11 @@
     [super viewDidUnload];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if([self.tableView numberOfRowsInSection:0]==0)[self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Place"];

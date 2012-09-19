@@ -741,11 +741,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/PlacesViewController.m"
-         timestampString = "369776157.003516"
+         timestampString = "369777729.079148"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
          landmarkName = "-setupFetchedResultsController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -839,11 +839,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/PlacesViewController.m"
-         timestampString = "369776157.003516"
+         timestampString = "369777729.079148"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
          landmarkName = "-documentIsReady:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -853,11 +853,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/PlacesViewController.m"
-         timestampString = "369776157.003516"
+         timestampString = "369777729.079148"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -867,11 +867,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/PhotoListViewController.m"
-         timestampString = "369777246.563493"
+         timestampString = "369777617.909501"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "198"
-         endingLineNumber = "198">
+         startingLineNumber = "202"
+         endingLineNumber = "202">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -879,11 +879,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/PhotoListViewController.m"
-         timestampString = "369777246.563493"
+         timestampString = "369777617.909501"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "219"
-         endingLineNumber = "219">
+         startingLineNumber = "223"
+         endingLineNumber = "223">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

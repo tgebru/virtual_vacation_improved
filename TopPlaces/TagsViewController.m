@@ -62,6 +62,11 @@
                       }];
 }  
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if([self.tableView numberOfRowsInSection:0]==0)[self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidUnload
 {
     NSLog(@"TagsList: %s", __FUNCTION__);

@@ -6,10 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 
 //Download a certain number of pictures specified by MAX_RESULTS from Flickr
+
 #import "FlickerRecentPhotosFromPlaceViewController.h"
-//#import "FlickrFetcher.h"
-//#import "FlickrSinglePhotoViewController.h"
-//#import "FlickrPhotoAnnotation.h"
+#import "Cache.h"
+#import "FlickrFetcher.h"
+#import "FlickrSinglePhotoViewController.h"
+#import "FlickrPhotoAnnotation.h"
 //#import "MapViewController.h"
 
 #define MAX_RESULTS 50
@@ -17,9 +19,9 @@
 
 @interface FlickerRecentPhotosFromPlaceViewController()
 @property (nonatomic, strong) UIImage *photoImage;
-@property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
+//@property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
 @property (nonatomic, strong) NSDictionary *photoForAnnotation;
-@property (nonatomic, strong) NSDictionary *place;
+//@property (nonatomic, strong) NSDictionary *place;
 @property (nonatomic, strong) Cache *flickrPhotoCache;
 @property (nonatomic, strong) NSNumber *isRecentlyViewedPhotos;
 @property (nonatomic, strong) NSNumber *visited;

@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FlickerRecentPhotosFromPlaceViewController.h"
 
-@interface FlickerPhotosViewController : UITableViewController 
-#define RECENTS_KEY @"Recent Photos"
-@property (nonatomic, strong) NSArray *photos; //an array of flicker photo dictionaries
-- (void) showSpinner;
-//- (void)setPhotos:(NSArray *)photos;
+@interface FlickerPhotosViewController : FlickerRecentPhotosFromPlaceViewController 
 @end
 

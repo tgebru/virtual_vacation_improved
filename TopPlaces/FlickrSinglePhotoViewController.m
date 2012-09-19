@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSDictionary *photoDictionary;
-//@property (nonatomic, strong) UIImage *image;
 
 -(void) documentIsReady:(UIManagedDocument *)doc :(NSString *)actionToDo;
 
@@ -30,7 +29,7 @@
 @synthesize scrollView;
 @synthesize photoDictionary = _photoDictionary;
 @synthesize visitedPic = _visitedPic;
-//@synthesize image =_image;
+@synthesize vacationName=_vacationName;
 
 - (void) showSpinner
 {
@@ -69,40 +68,32 @@
     }
 }
 
-/*
 - (IBAction)toggleVisit:(id)sender {
     //Toggle title of button
     if ([sender isKindOfClass:[UIButton class]]){
         NSLog (@"it is a UIButton");
         UIButton *visitButton = (UIButton *)sender;
         
-        NSString *vacationName = @"Another Vacation";//@"My Vacation";
-        [self visitOrUnvisitVacation:vacationName];
         if ([visitButton.titleLabel.text compare:@"Visit"] == NSOrderedSame){
+            //[visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
+            //self.visitedPic = [NSNumber numberWithBool:NO];
+            //segue to ask user to choose vacations
+            [self performSegueWithIdentifier:@"toChooseOptions" sender:sender];  
             
-            //save to my vacation database: the database name is hard coded
-            //To do ask user to enter new vacation or save to existing vacation
-            [VacationHelper openVacation: vacationName
-                              usingBlock:^ (UIManagedDocument *doc){
-                                  [self documentIsReady:doc :@"create"];
-                              }];
-
-            
-            [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
         }else {
             //delete from db
-            [VacationHelper openVacation:vacationName
+            [VacationHelper openVacation:self.vacationName
                               usingBlock:^ (UIManagedDocument *doc){
                                   [self documentIsReady:doc :@"delete"];
-                              }];
-            
+                              }];            
+            self.visitedPic = [NSNumber numberWithBool:NO];
             [visitButton setTitle:@"Visit" forState:UIControlStateNormal];
-                        
+            //Pop from navigation controller?
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
-
+    
 }
-*/
 - (NSArray*)readVirtualVacationsFromPlist
 {
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -115,46 +106,31 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //Toggle title of button
     if ([sender isKindOfClass:[UIButton class]]){
-        NSLog (@"it is a UIButton");
-        UIButton *visitButton = (UIButton *)sender;
-        
-        if ([visitButton.titleLabel.text compare:@"Visit"] == NSOrderedSame){
-            self.visitedPic = [NSNumber numberWithBool:NO];
-                [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
-        }else {
-            self.visitedPic = [NSNumber numberWithBool:YES];
-                       [visitButton setTitle:@"Visit" forState:UIControlStateNormal];
-            
-        }
+        //Ask user to choose which vacation to save to
         ChooseOptionsViewController *options = (ChooseOptionsViewController *)segue.destinationViewController;
         options.listOfOptions = [self readVirtualVacationsFromPlist];
         options.delegate = self;
     }
- 
+    
 }
 
 - (void)chooseOptionsViewController:(ChooseOptionsViewController *)sender
                         choseOption:(NSString *)option
 {
     NSString *vacationName = option;
-    if (!self.visitedPic.boolValue){
-        //save to my vacation database: the database name is hard coded
-        //To do ask user to enter new vacation or save to existing vacation
+    //if (!self.visitedPic.boolValue){
+        
+        //save to my vacation database
         [VacationHelper openVacation: vacationName
                           usingBlock:^ (UIManagedDocument *doc){
                               [self documentIsReady:doc :@"create"];
                           }];
-    }else{
-        //delete from db
-        [VacationHelper openVacation:vacationName
-                          usingBlock:^ (UIManagedDocument *doc){
-                              [self documentIsReady:doc :@"delete"];
-                          }];
-        
-    }
+   // }
     [self dismissModalViewControllerAnimated:YES];
+    [self.visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
+    self.vacationName = vacationName;
+    self.visitedPic = [NSNumber numberWithBool:YES];
 }
 
 - (void)setImage:(UIImage *)image forPhotoDictionary:(NSDictionary *)photoDictionary
@@ -175,6 +151,7 @@
 {
     NSLog(@"Flickr: %s", __FUNCTION__);
     [super viewDidLoad];
+     if (self.visitedPic.boolValue) [self.visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];  
     if (!self.imageView.image) {[self showSpinner];}
 
 }
@@ -228,6 +205,7 @@
     [self setScrollView:nil];
     [self setImageView:nil];
     //[self setVisitButton:nil];
+    [self setVisitButton:nil];
     [super viewDidUnload];
 }
 

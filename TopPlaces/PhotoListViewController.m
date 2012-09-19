@@ -31,19 +31,13 @@
 
 #pragma mark - Table view data source
 
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
-
+*/
 - (void)setVacationName:(NSString *)vacationName
 {
     _vacationName = vacationName;
@@ -56,7 +50,6 @@
     [super viewDidLoad];
     self.flickrPhotoCache = [[Cache alloc]init];
     [self.flickrPhotoCache getCache];
-
 }
 
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
@@ -165,6 +158,7 @@
                // self.navigationItem.rightBarButtonItem = nil;
                 //[segue.destinationViewController setVisitedPic:YES];
                 [segue.destinationViewController setVisitedPic: [NSNumber numberWithBool:YES]];
+                [segue.destinationViewController setVacationName:self.vacationName];
                 [segue.destinationViewController setImage:photoImage forPhotoDictionary:photo];
                 
             });

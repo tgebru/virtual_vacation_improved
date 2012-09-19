@@ -13,11 +13,13 @@
 @synthesize vacationUserInput = _vacationUserInput;
 @synthesize  virtualVacations =_virtualVacations;  // Names of our virtual vacations
 
+
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.vacationUserInput.delegate = self;
+    self.vacationUserInput.clearsOnBeginEditing = YES;
 }
 
 - (void)viewDidUnload

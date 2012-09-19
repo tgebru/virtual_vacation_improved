@@ -47,7 +47,7 @@
         
         int i=0;
         for (NSString *tag in tags){
-            if ([tag rangeOfString:@":"].location == NSNotFound){
+            if (([tag rangeOfString:@":"].location == NSNotFound) && [tag length] !=0){
                 NSString *tagWithCapFirstLetter = [[tag lowercaseString] stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[tag substringToIndex:1] uppercaseString]];
                 [tagsWithCapFirstLetter insertObject:tagWithCapFirstLetter atIndex:i];
                 i++;        

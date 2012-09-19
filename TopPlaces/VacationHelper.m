@@ -47,7 +47,7 @@ static NSMutableDictionary *vacationToDocumentMapping;
         NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory 
                                                              inDomains:NSUserDomainMask] lastObject];
         
-        NSString *anotherVacationName = @"My Vacation.db";
+        NSString *anotherVacationName = [vacationName stringByAppendingString:@".db"];//@"My Vacation.db";
         url = [url URLByAppendingPathComponent: anotherVacationName];//vacationName];
         // url is now "<Documents Directory>/Default Photo Database"
         

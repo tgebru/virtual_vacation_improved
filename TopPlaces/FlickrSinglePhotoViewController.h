@@ -14,6 +14,6 @@
 @property (nonatomic, strong) NSNumber *visitedPic;
 //@property (nonatomic, strong) UIImage *image;
 - (void)setImage:(UIImage *)image forPhotoDictionary:(NSDictionary *)photoDictionary;
-- (IBAction)toggleVisit:(id)sender;
+//- (IBAction)toggleVisit:(id)sender;
 
 @end

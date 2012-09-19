@@ -12,8 +12,9 @@
 #import "Photo+Create.h"
 #import "Photo+Delete.h"
 #import "Photo.h"
+#import "ChooseOptionsViewController.h"
 
-@interface FlickrSinglePhotoViewController() <UIScrollViewDelegate>
+@interface FlickrSinglePhotoViewController() <UIScrollViewDelegate, ChooseOptionsViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSDictionary *photoDictionary;
@@ -68,15 +69,20 @@
     }
 }
 
+/*
 - (IBAction)toggleVisit:(id)sender {
     //Toggle title of button
     if ([sender isKindOfClass:[UIButton class]]){
         NSLog (@"it is a UIButton");
         UIButton *visitButton = (UIButton *)sender;
+        
+        NSString *vacationName = @"Another Vacation";//@"My Vacation";
+        [self visitOrUnvisitVacation:vacationName];
         if ([visitButton.titleLabel.text compare:@"Visit"] == NSOrderedSame){
             
             //save to my vacation database: the database name is hard coded
-            [VacationHelper openVacation:@"My Vacation"
+            //To do ask user to enter new vacation or save to existing vacation
+            [VacationHelper openVacation: vacationName
                               usingBlock:^ (UIManagedDocument *doc){
                                   [self documentIsReady:doc :@"create"];
                               }];
@@ -85,7 +91,7 @@
             [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
         }else {
             //delete from db
-            [VacationHelper openVacation:@"My Vacation"
+            [VacationHelper openVacation:vacationName
                               usingBlock:^ (UIManagedDocument *doc){
                                   [self documentIsReady:doc :@"delete"];
                               }];
@@ -95,6 +101,60 @@
         }
     }
 
+}
+*/
+- (NSArray*)readVirtualVacationsFromPlist
+{
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *vacationPath = [documentsDirectory stringByAppendingPathComponent:@"vacations.plist"];
+    if (vacationPath){
+       return [[[NSDictionary alloc] initWithContentsOfFile:vacationPath] allKeys]; 
+    }
+    return nil;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //Toggle title of button
+    if ([sender isKindOfClass:[UIButton class]]){
+        NSLog (@"it is a UIButton");
+        UIButton *visitButton = (UIButton *)sender;
+        
+        if ([visitButton.titleLabel.text compare:@"Visit"] == NSOrderedSame){
+            self.visitedPic = [NSNumber numberWithBool:NO];
+                [visitButton setTitle:@"Unvisit" forState:UIControlStateNormal];
+        }else {
+            self.visitedPic = [NSNumber numberWithBool:YES];
+                       [visitButton setTitle:@"Visit" forState:UIControlStateNormal];
+            
+        }
+        ChooseOptionsViewController *options = (ChooseOptionsViewController *)segue.destinationViewController;
+        options.listOfOptions = [self readVirtualVacationsFromPlist];
+        options.delegate = self;
+    }
+ 
+}
+
+- (void)chooseOptionsViewController:(ChooseOptionsViewController *)sender
+                        choseOption:(NSString *)option
+{
+    NSString *vacationName = option;
+    if (self.visitedPic.boolValue){
+        //save to my vacation database: the database name is hard coded
+        //To do ask user to enter new vacation or save to existing vacation
+        [VacationHelper openVacation: vacationName
+                          usingBlock:^ (UIManagedDocument *doc){
+                              [self documentIsReady:doc :@"create"];
+                          }];
+    }else{
+        //delete from db
+        [VacationHelper openVacation:vacationName
+                          usingBlock:^ (UIManagedDocument *doc){
+                              [self documentIsReady:doc :@"delete"];
+                          }];
+        
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)setImage:(UIImage *)image forPhotoDictionary:(NSDictionary *)photoDictionary

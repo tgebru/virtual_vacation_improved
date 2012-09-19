@@ -225,13 +225,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
-         timestampString = "366998610.271021"
+         timestampString = "369720859.585122"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "@implementation FlickrSinglePhotoViewController"
-         landmarkType = "3">
+         startingLineNumber = "150"
+         endingLineNumber = "150"
+         landmarkName = "-chooseOptionsViewController:choseOption:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -239,12 +239,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
-         timestampString = "366998610.271021"
+         timestampString = "369720859.585122"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
-         landmarkName = "-viewForZoomingInScrollView:"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
+         landmarkName = "-chooseOptionsViewController:choseOption:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -899,9 +899,7 @@
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "203"
-         endingLineNumber = "203"
-         landmarkName = "-prepareForSegue:sender:"
-         landmarkType = "5">
+         endingLineNumber = "203">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -913,9 +911,7 @@
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "224"
-         endingLineNumber = "224"
-         landmarkName = "-prepareForSegue:sender:"
-         landmarkType = "5">
+         endingLineNumber = "224">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

@@ -225,11 +225,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
-         timestampString = "369720859.585122"
+         timestampString = "369736410.677962"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "-chooseOptionsViewController:choseOption:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -239,11 +239,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
-         timestampString = "369720859.585122"
+         timestampString = "369736410.677962"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
          landmarkName = "-chooseOptionsViewController:choseOption:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1121,6 +1121,20 @@
          startingLineNumber = "245"
          endingLineNumber = "245"
          landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TopPlaces/FlickrSinglePhotoViewController.m"
+         timestampString = "369736410.677962"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
+         landmarkName = "-chooseOptionsViewController:choseOption:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

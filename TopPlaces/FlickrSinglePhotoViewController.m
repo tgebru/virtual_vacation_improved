@@ -139,7 +139,7 @@
                         choseOption:(NSString *)option
 {
     NSString *vacationName = option;
-    if (self.visitedPic.boolValue){
+    if (!self.visitedPic.boolValue){
         //save to my vacation database: the database name is hard coded
         //To do ask user to enter new vacation or save to existing vacation
         [VacationHelper openVacation: vacationName
